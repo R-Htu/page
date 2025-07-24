@@ -10,6 +10,12 @@
     @tailwind base;
     @tailwind components;
     @tailwind utilities;
+
+    @layer components {
+      li{
+        @apply hover:text-blue-700 hover:font-semibold;
+      }
+    }
   </style>
   <script>
     tailwind.config = {
@@ -17,13 +23,24 @@
     }
   </script>
 </head>
-<body>
-  <nav>
-    <div class="relative bg-gray-300 w-12 h-7 rounded-full">
-        <div class="absolute">
-            <i class="fa-solid fa-moon"></i>
+<body class="dark:bg-gray-900">
+  <nav class="bg-gray-100 dark:bg-gray-700 dark:text-white font-serif p-4 flex gap-4 justify-between">
+    <button onclick="toggleMode()" id="toggleBtn" class="relative pointer-events-auto border shawdow-xl bg-white dark:bg-black w-16 h-7 transition-colors duration-500 rounded-full flex justify-center transition-all duration-500">
+        <div id="toggleThumb" class="absolute bg-gray-300 dark:bg-yellow-200 w-7 h-7 left-1 transform transition-transform duration-500  rounded-full flex justify-center items-center">
+            <i id="icon" class="fa-solid fa-moon text-gray-600 dark:text-yellow-400"></i>
         </div>
-    </div>
+    </button>
+
+    <ul  class="flex gap-7 flex-wrap mr-7">
+      <li>CSS</li>
+      <li>Tailwind</li>
+      <li>JavaScript</li>
+      <li>React</li>
+      <li>Next.js</li>
+      <li>API</li>
+    </ul>
   </nav>
+
+  <script src="script.js"></script>
 </body>
 </html>
