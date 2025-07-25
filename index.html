@@ -12,8 +12,16 @@
     @tailwind utilities;
 
     @layer components {
+
       li{
-        @apply hover:text-blue-700 hover:font-semibold;
+        @apply hover:text-blue-700 hover:font-semibold
+                pointer-events-auto;
+      }
+
+      .theme {
+        @apply bg-gray-100 dark:bg-gray-700 text-gray-600 
+               dark:text-gray-200 font-serif p-4 
+               flex flex-wrap items-center;
       }
     }
   </style>
@@ -23,24 +31,69 @@
     }
   </script>
 </head>
-<body class="dark:bg-gray-900">
-  <nav class="bg-gray-100 dark:bg-gray-700 dark:text-white font-serif p-4 flex gap-4 justify-between">
-    <button onclick="toggleMode()" id="toggleBtn" class="relative pointer-events-auto border shawdow-xl bg-white dark:bg-black w-16 h-7 transition-colors duration-500 rounded-full flex justify-center transition-all duration-500">
-        <div id="toggleThumb" class="absolute bg-gray-300 dark:bg-yellow-200 w-7 h-7 left-1 transform transition-transform duration-500  rounded-full flex justify-center items-center">
-            <i id="icon" class="fa-solid fa-moon text-gray-600 dark:text-yellow-400"></i>
-        </div>
-    </button>
+<body class="dark:bg-gray-900 bg-gray-200 min-h-screen">
+  <main>
+    <nav class="theme justify-between gap-4">
+      <button onclick="toggleMode()" id="toggleBtn" class="relative pointer-events-auto border shadow-xl bg-white dark:bg-black w-16 h-7 transition-colors duration-500 rounded-full flex justify-center transition-all duration-500">
+          <div id="toggleThumb" class="absolute bg-gray-300 dark:bg-yellow-200 w-7 h-7 left-1 transform transition-transform duration-500  rounded-full flex justify-center items-center">
+              <i id="icon" class="fa-solid fa-moon text-gray-600 dark:text-yellow-400"></i>
+          </div>
+      </button>
+      <h1 id="firstHeader">Welcome to this messy page</h1>
+      <h1 id="secondHeader" class="hidden">Let's explore something weird</h1>
+      <button>
+        <i id="listIcon" class="fa-solid fa-ellipsis text-gray-600 dark:text-gray-200"></i>
+        <ul  class="flex gap-7 flex-wrap hidden mr-7">
+        <li>CSS</li>
+        <li>Tailwind</li>
+        <li>JavaScript</li>
+        <li>React</li>
+        <li>Next.js</li>
+        <li>API</li>
+      </ul>
+      </button>
+    </nav>
+  </main>
 
-    <ul  class="flex gap-7 flex-wrap mr-7">
-      <li>CSS</li>
-      <li>Tailwind</li>
-      <li>JavaScript</li>
-      <li>React</li>
-      <li>Next.js</li>
-      <li>API</li>
-    </ul>
-  </nav>
+  <footer class="theme justify-center absolute bottom-0 w-full">
+    <p>hey see you again</p>
+  </footer>
 
-  <script src="script.js"></script>
+  <script>
+    
+    function setToggle(theme){
+        const icon = document.getElementById('icon');
+        const thumb = document.getElementById('toggleThumb');
+
+        if(theme) {
+
+            icon.classList.replace('fa-moon', 'fa-sun');
+            thumb.style.transform = "translateX(28px)";
+
+        } else {
+        
+            icon.classList.replace('fa-sun', 'fa-moon')
+            thumb.style.transform = "translateX(0)";
+        }
+    }
+
+    function toggleMode() {
+
+        const root = document.documentElement;
+        const toggle = root.classList.toggle('dark');
+        
+        setToggle(toggle)
+    }
+
+    document.getElementById('listIcon').addEventListener('click', () => {
+      document.querySelector('ul').classList.toggle('hidden')
+       document.getElementById('listIcon').classList.add('hidden');
+       document.querySelector('#fristHeader').classList.add('hidden');
+       document.querySelector('#secondHeader').classList.remove('hidden');
+    })
+
+
+  </script>
+
 </body>
 </html>
